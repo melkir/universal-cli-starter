@@ -9,7 +9,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "universal": "ng build -prod -app 1 --output-hashing none && gulp"
+    "server": "tsc -project src/server && node dist-server/bin/www.js",
+    "universal": "ng build -prod -app 1 --output-hashing none && npm run server"
   },
   "private": true,
   "dependencies": {
@@ -36,9 +37,6 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "^8.0.24",
     "codelyzer": "~3.1.1",
-    "gulp": "^3.9.1",
-    "gulp-nodemon": "^2.2.1",
-    "gulp-typescript": "^3.2.2",
     "jasmine-core": "~2.7.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.0",
