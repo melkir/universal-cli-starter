@@ -6,15 +6,14 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build:universal": "npm run compile:app && npm run compile:server",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prod": "npm run compile:all && npm run start:server",
-    "universal": "npm run compile:app && npm run server",
-    "server": "nodemon --exec \"npm run compile:server && npm run start:server\"",
+    "universal": "npm run compile:app && npm run server:dev",
+    "server:dev": "tsc-watch -p src/server --onSuccess \"npm run start:server\"",
     "compile:app": "ng build -prod -app 1 --output-hashing none",
     "compile:server": "tsc -p src/server",
-    "compile:all": "npm run compile:app && npm run compile:server",
     "start:server": "node dist-server/bin/www.js"
   },
   "private": true,
@@ -50,10 +49,10 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "nodemon": "^1.11.0",
     "protractor": "~5.1.2",
     "ts-node": "~3.3.0",
     "tslint": "~5.6.0",
-    "typescript": "~2.4.2"
+    "typescript": "~2.4.2",
+    "tsc-watch": "github:gilamran/tsc-watch#3d657bcb7c16c6cf8e0fd25f22326543fab9c76c"
   }
 }
