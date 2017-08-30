@@ -9,8 +9,13 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "server": "tsc -project src/server && node dist-server/bin/www.js",
-    "universal": "ng build -prod -app 1 --output-hashing none && npm run server"
+    "prod": "npm run compile:all && npm run start:server",
+    "universal": "npm run compile:app && npm run server",
+    "server": "nodemon --exec \"npm run compile:server && npm run start:server\"",
+    "compile:app": "ng build -prod -app 1 --output-hashing none",
+    "compile:server": "tsc -p src/server",
+    "compile:all": "npm run compile:app && npm run compile:server",
+    "start:server": "node dist-server/bin/www.js"
   },
   "private": true,
   "dependencies": {
@@ -24,9 +29,9 @@
     "@angular/platform-browser-dynamic": "^4.2.4",
     "@angular/router": "^4.2.4",
     "core-js": "^2.4.1",
+    "express": "^4.15.4",
     "rxjs": "^5.4.2",
-    "zone.js": "^0.8.14",
-    "express": "^4.15.4"
+    "zone.js": "^0.8.14"
   },
   "devDependencies": {
     "@angular/cli": "1.3.1",
@@ -45,6 +50,7 @@
     "karma-coverage-istanbul-reporter": "^1.2.1",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
+    "nodemon": "^1.11.0",
     "protractor": "~5.1.2",
     "ts-node": "~3.3.0",
     "tslint": "~5.6.0",
